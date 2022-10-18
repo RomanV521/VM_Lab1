@@ -7,27 +7,40 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    private static final int rank =5;
+    private static final int rank = 5;
 
     public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
+//        Scanner sc = new Scanner(System.in);
 //        System.out.print("Введите число в 10-ричной системе: ");
 //        int input=sc.nextInt();
-//        System.out.println(toBin(input,5));
-//        System.out.println((0 & 10));
+//        System.out.println(toBin(input,rank));
 
         GetNum(new File("input.txt"), new FileWriter("output.txt", false));
     }
 
+    /**
+     * Перевод из десятичной в двоичную<br><br>
+     * Convert from decimal to binary
+     * @param input
+     * @param rank
+     * @return
+     */
     public static String toBin(int input, int rank)
     {
         int b=1;
         String output="";
 
-        for (int i=0; i<rank; i++)
-        {
-            output = (((input & b) != 0)?"1":"0")+output;
-            b=b*2;
+//        for (int i=0; i<rank; i++)
+//        {
+//            output = (((input & b) != 0)?"1":"0")+output;
+//            b=b*2;
+//        }
+
+        //При помощи деления на два
+        while(input !=0){
+            b = input%2;
+            output = b + output;
+            input = input/2;
         }
         return output;
     }
@@ -55,7 +68,9 @@ public class Main {
                     break;
                 }
             }
+            FileWriter fileWriterInput = new FileWriter(fileInput, false);
             fileOutput.close();
+            fileWriterInput.close();
         }
     }
 }
